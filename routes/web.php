@@ -21,4 +21,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('tarefa', TarefaController::class)->middleware('auth');
+Route::resource('tarefa', TarefaController::class);
+
+Route::get('/mensagem-teste', function () {
+    return new \App\Mail\MensagemTesteMail();
+    //    \Illuminate\Support\Facades\Mail::to('ficechin@hotmail.com')->send(new \App\Mail\MensagemTesteMail());
+    //    return 'E-mail enviado';
+});

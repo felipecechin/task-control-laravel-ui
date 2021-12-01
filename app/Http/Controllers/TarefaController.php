@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Tarefa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TarefaController extends Controller {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the resource.
@@ -13,7 +18,20 @@ class TarefaController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return 'Chegamos até aqui';
+        $id = Auth::user()->id;
+        $nome = Auth::user()->name;
+        $email = Auth::user()->email;
+        return "ID $id | NOME $nome";
+
+
+        //        if (auth()->check()) {
+        //            $id = auth()->user()->id;
+        //            $nome = auth()->user()->name;
+        //            $email = auth()->user()->email;
+        //            return "ID $id | NOME $nome";
+        //        } else {
+        //            return 'Você não está logado no sistema.';
+        //        }
     }
 
     /**
